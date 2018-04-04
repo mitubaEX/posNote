@@ -1,19 +1,10 @@
-import * as React from 'react';
-import CountStore from './store/CountStore';
-import { observer } from 'mobx-react';
+import React, { Component } from 'react';
+import CountContainer from './containers/CountContainer';
 
-const stores = new CountStore();
-
-@observer
-class App extends React.Component {
+class App extends Component {
   render() {
     return (
-      <div>
-        Counter : {stores.num}<br/>
-        <button onClick={stores.onIncrement}> + </button>
-        <button onClick={stores.onDecrement}> - </button>
-        <br/>  GetDoubleCount: {stores.getDoubleCount}
-      </div>
+      <CountContainer />
     );
   }
 }
