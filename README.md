@@ -6,3 +6,10 @@ firebase + TypeScript練習
 ```
 yarn install && yarn start
 ```
+
+## Ref
+
+- firebase
+- marked
+- material-ui
+- mobx
