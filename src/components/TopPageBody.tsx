@@ -5,7 +5,6 @@ import { List, ListItem } from 'material-ui/List';
 import Divider from 'material-ui/Divider';
 import Avatar from 'material-ui/Avatar';
 import { darkBlack } from 'material-ui/styles/colors';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 type Props = {
     users: UsersStoreType
@@ -14,7 +13,7 @@ type Props = {
 @inject('users')
 @observer
 export default class TopPageBody extends Component<Props> {
-    render () {
+    render() {
         const { users } = this.props;
         return (
             <div>
@@ -22,21 +21,19 @@ export default class TopPageBody extends Component<Props> {
                     'Hello' :
                     'Please Login'
                 }
-                <MuiThemeProvider>
-                    <List>
-                        <ListItem
-                            leftAvatar={<Avatar src={users!.loginUserPhotoURL} />}
-                            primaryText="Brunch this weekend?"
-                            secondaryText={
-                                <p>
-                                    <span style={{ color: darkBlack }}>Brendan Lim</span>
-                                </p>
-                            }
-                            secondaryTextLines={2}
-                        />
-                        <Divider inset={true} />
-                    </List>
-                </MuiThemeProvider>
+                <List>
+                    <ListItem
+                        leftAvatar={<Avatar src={users!.loginUserPhotoURL} />}
+                        primaryText="Brunch this weekend?"
+                        secondaryText={
+                            <p>
+                                <span style={{ color: darkBlack }}>Brendan Lim</span>
+                            </p>
+                        }
+                        secondaryTextLines={2}
+                    />
+                    <Divider inset={true} />
+                </List>
             </div>
         );
     }
