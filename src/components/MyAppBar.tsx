@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { inject, observer } from 'mobx-react';
 import AppBar from 'material-ui/AppBar';
 import IconButton from 'material-ui/IconButton';
-import NavigationClose from 'material-ui/svg-icons/navigation/close';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import FlatButton from 'material-ui/FlatButton';
 import Avatar from 'material-ui/Avatar';
@@ -38,8 +37,9 @@ export default class MyAppBar extends Component<Props> {
             <div>
                 <MuiThemeProvider>
                     <AppBar
-                        title="Title"
-                        iconElementLeft={<IconButton><NavigationClose /></IconButton>}
+                        title="PosNote"
+                        onTitleClick={() => console.log('hello')}
+                        showMenuIconButton={false}
                         iconElementRight={users!.isLogin ?
                             <Logged
                                 onClick={users!.logoutUser}
