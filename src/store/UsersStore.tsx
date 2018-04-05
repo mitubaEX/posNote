@@ -27,6 +27,7 @@ export type UsersStoreType = {
     addUser: (user: ProviderData) => void
     loginUserName: string
     isLogin: boolean
+    loginUserPhotoURL: string
     loginUser: () => void
     logoutUser: () => void
 };
@@ -38,11 +39,15 @@ export default class UsersStore {
         return this.users.map((n) => n.displayName).join(',');
     }
 
+    @computed get loginUserPhotoURL() {
+        return this.users.map((n) => n.photoURL).join(',');
+    }
+
     @computed get isLogin() {
         if (this.users.length === 0) {
-            return true;
+            return false;
         }
-        return false;
+        return true;
     }
 
     @action.bound loginUser() {
