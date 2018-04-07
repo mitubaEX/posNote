@@ -13,20 +13,20 @@ export type NoteStoreType = {
   finishPost: () => void
 };
 
-type Note = {
-  id: string
+export type Note = {
   title: string
   body: string
   isPosted: boolean
+  timestamp: string
   snackbarMessage: string
 };
 
 export default class NoteStore {
   @observable note: Note = {
-    id: '',
     title: '',
     body: '',
     isPosted: false,
+    timestamp: '',
     snackbarMessage: ''
   };
 
