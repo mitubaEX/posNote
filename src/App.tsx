@@ -7,8 +7,13 @@ import {
   BrowserRouter as Router,
   Route,
 } from 'react-router-dom';
+import { usersStore } from './data_store';
 
 class App extends Component {
+  componentWillMount() {
+    usersStore.getCookieAndLogin();
+  }
+
   render() {
     return (
       <div>

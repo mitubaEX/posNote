@@ -7,34 +7,34 @@ import Avatar from 'material-ui/Avatar';
 import { darkBlack } from 'material-ui/styles/colors';
 
 type Props = {
-    users: UsersStoreType
+  users: UsersStoreType
 };
 
 @inject('users')
 @observer
 export default class TopPageBody extends Component<Props> {
-    render() {
-        const { users } = this.props;
-        return (
-            <div>
-                {users!.isLogin ?
-                    'Hello' :
-                    'Please Login'
-                }
-                <List>
-                    <ListItem
-                        leftAvatar={<Avatar src={users!.loginUserPhotoURL} />}
-                        primaryText="Brunch this weekend?"
-                        secondaryText={
-                            <p>
-                                <span style={{ color: darkBlack }}>Brendan Lim</span>
-                            </p>
-                        }
-                        secondaryTextLines={2}
-                    />
-                    <Divider inset={true} />
-                </List>
-            </div>
-        );
-    }
+  render() {
+    const { users } = this.props;
+    return (
+      <div>
+        {users!.isLogin ?
+          'Hello' :
+          'Please Login'
+        }
+        <List>
+          <ListItem
+            leftAvatar={<Avatar src={users!.loginUserPhotoURL} />}
+            primaryText="Brunch this weekend?"
+            secondaryText={
+              <p>
+                <span style={{ color: darkBlack }}>Brendan Lim</span>
+              </p>
+            }
+            secondaryTextLines={2}
+          />
+          <Divider inset={true} />
+        </List>
+      </div>
+    );
+  }
 }
