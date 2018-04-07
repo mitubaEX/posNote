@@ -5,6 +5,7 @@ import AceEditor from 'react-ace';
 import MarkDownPreview from './MarkDownPreview';
 import RaisedButton from 'material-ui/RaisedButton';
 import { Link } from 'react-router-dom';
+import Snackbar from 'material-ui/Snackbar';
 
 import 'brace/mode/markdown';
 import 'brace/theme/github';
@@ -44,9 +45,15 @@ export default class EditPageBody extends Component<Props> {
         <RaisedButton
           primary={true}
           label="Post"
-          containerElement={<Link to="/" />}
+          containerElement={note!.note!.isEnable ? <Link to="/" /> : <div />}
           fullWidth={true}
           onClick={note!.note!.postNote}
+        />
+        <Snackbar
+          open={note!.note!.note!.isPosted}
+          message={note!.note!.note!.snackbarMessage}
+          autoHideDuration={2000}
+          onRequestClose={note!.note!.finishPost}
         />
       </div>
     );

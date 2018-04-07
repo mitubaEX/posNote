@@ -6,6 +6,7 @@ export type NoteStoreType = {
   note: Note
   noteTitle: string
   noteBody: string
+  isEnable: boolean
   changeTitle: (title: string) => void
   changeBody: (body: string) => void
   postNote: () => void
@@ -17,6 +18,7 @@ type Note = {
   title: string
   body: string
   isPosted: boolean
+  snackbarMessage: string
 };
 
 export default class NoteStore {
@@ -24,7 +26,8 @@ export default class NoteStore {
     id: '',
     title: '',
     body: '',
-    isPosted: false
+    isPosted: false,
+    snackbarMessage: ''
   };
 
   @computed get noteTitle() {
@@ -32,8 +35,14 @@ export default class NoteStore {
   }
 
   @computed get noteBody() {
-    console.log(this.note.body);
     return this.note.body;
+  }
+
+  @computed get isEnable() {
+    if ( this.note.title === '' || this.note.body === '' ) {
+      return false;
+    }
+    return true;
   }
 
   @action.bound changeTitle(title: string) {
@@ -47,14 +56,20 @@ export default class NoteStore {
   }
 
   @action.bound postNote() {
-    firebaseDb.ref('posts/' + usersStore.loginUID).push({
-      title: this.noteTitle,
-      body: this.noteBody,
-      timestamp: Math.floor(new Date().getTime() / 1000)
-    });
-    this.note.title = '';
-    this.note.body = '';
-    this.note.isPosted = true;
+    if ( this.note.title === '' || this.note.body === '' ) {
+      this.note.snackbarMessage = 'タイトルと本文を設定してください！';
+      this.note.isPosted = true;
+    } else {
+      firebaseDb.ref('posts/' + usersStore.loginUID).push({
+        title: this.noteTitle,
+        body: this.noteBody,
+        timestamp: Math.floor(new Date().getTime() / 1000)
+      });
+      this.note.title = '';
+      this.note.body = '';
+      this.note.snackbarMessage = '記事が投稿されました！';
+      this.note.isPosted = true;
+    }
   }
 
   @action.bound finishPost() {

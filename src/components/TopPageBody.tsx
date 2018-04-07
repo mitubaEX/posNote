@@ -41,7 +41,7 @@ export default class TopPageBody extends Component<Props> {
         </List>
         <Snackbar
           open={note!.note!.isPosted}
-          message="記事が投稿されました"
+          message={note!.note!.snackbarMessage}
           autoHideDuration={2000}
           onRequestClose={note!.finishPost}
         />
