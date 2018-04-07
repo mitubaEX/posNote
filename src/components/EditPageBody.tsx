@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { NoteStoreType } from '../store/NoteStore';
 import { inject, observer } from 'mobx-react';
-import TextField from 'material-ui/TextField';
 import AceEditor from 'react-ace';
 import MarkDownPreview from './MarkDownPreview';
 import RaisedButton from 'material-ui/RaisedButton';
+import { Link } from 'react-router-dom';
 
 import 'brace/mode/markdown';
 import 'brace/theme/github';
@@ -20,9 +20,11 @@ export default class EditPageBody extends Component<Props> {
     const note = this.props;
     return (
       <div>
-        <TextField
-          hintText="Title"
-          fullWidth={true}
+        <input
+          placeholder="Title"
+          style={{ width: '100%', fontSize: '20px', borderWidth: '3px' }}
+          onChange={(e) => note!.note!.changeTitle(e.target.value)}
+          value={note!.note!.noteTitle}
         />
         <div style={{ display: 'flex' }}>
           <AceEditor
@@ -39,7 +41,13 @@ export default class EditPageBody extends Component<Props> {
           />
           <MarkDownPreview body={note!.note!.noteBody} />
         </div>
-        <RaisedButton primary={true} label="Post" fullWidth={true} />
+        <RaisedButton
+          primary={true}
+          label="Post"
+          containerElement={<Link to="/" />}
+          fullWidth={true}
+          onClick={note!.note!.postNote}
+        />
       </div>
     );
   }
