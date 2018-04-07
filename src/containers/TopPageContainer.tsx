@@ -10,7 +10,7 @@ export default class TopPageContainer extends Component {
         return (
             <div>
                 <MuiThemeProvider>
-                    <Provider users={usersStore} note={noteStore}>
+                    <Provider usersStore={usersStore} noteStore={noteStore}>
                         <TopPage />
                     </Provider>
                 </MuiThemeProvider>

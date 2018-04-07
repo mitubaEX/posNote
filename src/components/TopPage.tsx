@@ -6,21 +6,21 @@ import MyAppBar from './MyAppBar';
 import TopPageBody from './TopPageBody';
 
 type Props = {
-  users?: UsersStoreType
-  note?: NoteStoreType
+  usersStore?: UsersStoreType
+  noteStore?: NoteStoreType
 };
 
-@inject('users')
-@inject('note')
+@inject('usersStore')
+@inject('noteStore')
 @observer
 export default class TopPage extends Component<Props> {
   render() {
-    const { users } = this.props;
-    const { note } = this.props;
+    const { usersStore } = this.props;
+    const { noteStore } = this.props;
     return (
       <div>
-        <MyAppBar users={users!} />
-        <TopPageBody users={users!} note={note!}/>
+        <MyAppBar usersStore={usersStore!} />
+        <TopPageBody usersStore={usersStore!} noteStore={noteStore!}/>
       </div>
     );
   }

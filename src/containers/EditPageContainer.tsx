@@ -10,7 +10,7 @@ export default class EditPageContainer extends Component {
     return (
       <div>
         <MuiThemeProvider>
-          <Provider note={noteStore} users={usersStore}>
+          <Provider noteStore={noteStore} usersStore={usersStore}>
             <EditPage />
           </Provider>
         </MuiThemeProvider>

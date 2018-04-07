@@ -11,28 +11,28 @@ import 'brace/mode/markdown';
 import 'brace/theme/github';
 
 type Props = {
-  note?: NoteStoreType
+  noteStore?: NoteStoreType
 };
 
-@inject('note')
+@inject('noteStore')
 @observer
 export default class EditPageBody extends Component<Props> {
   render() {
-    const note = this.props;
+    const { noteStore } = this.props;
     return (
       <div>
         <input
           placeholder="Title"
           style={{ width: '100%', fontSize: '20px', borderWidth: '3px' }}
-          onChange={(e) => note!.note!.changeTitle(e.target.value)}
-          value={note!.note!.noteTitle}
+          onChange={(e) => noteStore!.changeTitle(e.target.value)}
+          value={noteStore!.noteTitle}
         />
         <div style={{ display: 'flex' }}>
           <AceEditor
             mode="markdown"
             theme="github"
-            onChange={note!.note!.changeBody}
-            value={note!.note!.noteBody}
+            onChange={noteStore!.changeBody}
+            value={noteStore!.noteBody}
             tabSize={2}
             showPrintMargin={false}
             highlightActiveLine={false}
@@ -40,20 +40,20 @@ export default class EditPageBody extends Component<Props> {
             width="50%"
             editorProps={{ $blockScrolling: true }}
           />
-          <MarkDownPreview body={note!.note!.noteBody} />
+          <MarkDownPreview body={noteStore!.noteBody} />
         </div>
         <RaisedButton
           primary={true}
           label="Post"
-          containerElement={note!.note!.isEnable ? <Link to="/" /> : <div />}
+          containerElement={noteStore!.isEnable ? <Link to="/" /> : <div />}
           fullWidth={true}
-          onClick={note!.note!.postNote}
+          onClick={noteStore!.postNote}
         />
         <Snackbar
-          open={note!.note!.note!.isPosted}
-          message={note!.note!.note!.snackbarMessage}
+          open={noteStore!.note!.isPosted}
+          message={noteStore!.note!.snackbarMessage}
           autoHideDuration={2000}
-          onRequestClose={note!.note!.finishPost}
+          onRequestClose={noteStore!.finishPost}
         />
       </div>
     );

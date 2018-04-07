@@ -6,21 +6,21 @@ import MyAppBar from './MyAppBar';
 import EditPageBody from './EditPageBody';
 
 type Props = {
-  users?: UsersStoreType
-  note?: NoteStoreType
+  usersStore?: UsersStoreType
+  noteStore?: NoteStoreType
 };
 
-@inject('users')
-@inject('note')
+@inject('usersStore')
+@inject('noteStore')
 @observer
 export default class EditPage extends Component<Props> {
   render() {
-    const { note } = this.props;
-    const { users } = this.props;
+    const { noteStore } = this.props;
+    const { usersStore } = this.props;
     return (
       <div>
-        <MyAppBar users={users!} />
-        <EditPageBody note={note!} />
+        <MyAppBar usersStore={usersStore!} />
+        <EditPageBody noteStore={noteStore!} />
       </div>
     );
   }

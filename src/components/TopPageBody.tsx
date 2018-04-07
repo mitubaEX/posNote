@@ -9,26 +9,26 @@ import { darkBlack } from 'material-ui/styles/colors';
 import Snackbar from 'material-ui/Snackbar';
 
 type Props = {
-  users: UsersStoreType
-  note: NoteStoreType
+  usersStore: UsersStoreType
+  noteStore: NoteStoreType
 };
 
-@inject('users')
-@inject('note')
+@inject('usersStore')
+@inject('noteStore')
 @observer
 export default class TopPageBody extends Component<Props> {
   render() {
-    const { users } = this.props;
-    const { note } = this.props;
+    const { usersStore } = this.props;
+    const { noteStore } = this.props;
     return (
       <div>
-        {users!.isLogin ?
+        {usersStore!.isLogin ?
           'Hello' :
           'Please Login'
         }
         <List>
           <ListItem
-            leftAvatar={<Avatar src={users!.loginUserPhotoURL} />}
+            leftAvatar={<Avatar src={usersStore!.loginUserPhotoURL} />}
             primaryText="Brunch this weekend?"
             secondaryText={
               <p>
@@ -40,10 +40,10 @@ export default class TopPageBody extends Component<Props> {
           <Divider inset={true} />
         </List>
         <Snackbar
-          open={note!.note!.isPosted}
-          message={note!.note!.snackbarMessage}
+          open={noteStore!.note!.isPosted}
+          message={noteStore!.note!.snackbarMessage}
           autoHideDuration={2000}
-          onRequestClose={note!.finishPost}
+          onRequestClose={noteStore!.finishPost}
         />
       </div>
     );

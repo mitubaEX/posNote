@@ -13,7 +13,7 @@ import {
 } from 'react-router-dom';
 
 type Props = {
-  users: UsersStoreType
+  usersStore: UsersStoreType
 };
 
 const Logged = (props: { onClick: () => void, avatarImage: string }) => (
@@ -34,11 +34,11 @@ const Logged = (props: { onClick: () => void, avatarImage: string }) => (
   </div>
 );
 
-@inject('users')
+@inject('usersStore')
 @observer
 export default class MyAppBar extends Component<Props> {
   render() {
-    const { users } = this.props;
+    const { usersStore } = this.props;
     return (
       <div>
         <AppBar
@@ -47,14 +47,14 @@ export default class MyAppBar extends Component<Props> {
             containerElement={<Link to="/" />}
             style={{ color: 'white' }}
           />}
-          iconElementRight={users!.isLogin ?
+          iconElementRight={usersStore!.isLogin ?
             <Logged
-              onClick={users!.logoutUser}
-              avatarImage={users!.loginUserPhotoURL}
+              onClick={usersStore!.logoutUser}
+              avatarImage={usersStore!.loginUserPhotoURL}
             /> :
             <FlatButton
               label="Login"
-              onClick={users!.loginUser}
+              onClick={usersStore!.loginUser}
             />
           }
         />
