@@ -14,6 +14,7 @@ export type NoteStoreType = {
 };
 
 export type Note = {
+  id: string
   title: string
   body: string
   isPosted: boolean
@@ -23,6 +24,7 @@ export type Note = {
 
 export default class NoteStore {
   @observable note: Note = {
+    id: '',
     title: '',
     body: '',
     isPosted: false,

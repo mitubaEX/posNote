@@ -6,6 +6,7 @@ export type NoteListStoreType = {
   currentUserNoteList: Array<Note>
   getUserNoteList: () => void
   fetchAllUserNoteList: () => void
+  findByNoteId: () => void
 };
 
 type EachUIDNoteList = {
@@ -17,7 +18,7 @@ const getNoteList = (dbData: {}): Array<EachUIDNoteList> => {
   return Object.keys(dbData).map((n) => {
     return {
       uid: n,
-      eachUIDNoteList: Object.keys(dbData[n]).map((m) => { return dbData[n][m]; })
+      eachUIDNoteList: Object.keys(dbData[n]).map((m) => { return Object.assign(dbData[n][m], {id: m}); })
     };
   });
 };
@@ -39,6 +40,7 @@ export default class NoteListStore {
       var noteList = new Array<Note>();
       eachUIDNoteList.map((n) => n.eachUIDNoteList.map((m) => {
         const note = {
+          id: m.id,
           title: m.title,
           timestamp: m.timestamp,
           body: m.body,
@@ -53,7 +55,24 @@ export default class NoteListStore {
     }
   }
 
-  @action.bound filteredByUID(uid: string) {
+  @action.bound findByUID(uid: string) {
     this.userNoteList = this.allUserNoteList.filter((n) => n.uid === uid).map((n) => n.eachUIDNoteList)[0];
+  }
+
+  @action.bound findByNoteId(id: string) {
+    var note: Note = {
+      id: '',
+      isPosted: false,
+      timestamp: '',
+      title: '',
+      body: '',
+      snackbarMessage: ''
+    };
+    this.allUserNoteList.forEach((n) => n.eachUIDNoteList.forEach((m) => {
+      if (m.id === id) {
+        note = m;
+      } 
+    }));
+    return note;
   }
 }

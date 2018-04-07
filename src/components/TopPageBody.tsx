@@ -7,6 +7,7 @@ import { List, ListItem } from 'material-ui/List';
 import Avatar from 'material-ui/Avatar';
 import { darkBlack } from 'material-ui/styles/colors';
 import Snackbar from 'material-ui/Snackbar';
+import { Link } from 'react-router-dom';
 
 type Props = {
   usersStore: UsersStoreType
@@ -52,6 +53,7 @@ export default class TopPageBody extends Component<Props> {
                   </p>
                 }
                 secondaryTextLines={2}
+                containerElement={<Link to={`/note/${m.id}`} />}
               />
             )
           }

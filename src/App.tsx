@@ -3,11 +3,13 @@ import React, { Component } from 'react';
 // import UsersContainer from './containers/UsersContainer';
 import TopPageContainer from './containers/TopPageContainer';
 import EditPageContainer from './containers/EditPageContainer';
+import NotePage from './components/NotePage';
 import {
   BrowserRouter as Router,
   Route,
 } from 'react-router-dom';
 import { usersStore } from './data_store';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 class App extends Component {
   componentWillMount() {
@@ -17,12 +19,15 @@ class App extends Component {
   render() {
     return (
       <div>
-        <Router>
-          <div>
-            <Route exact={true} path="/" component={TopPageContainer} />
-            <Route path="/edit" component={EditPageContainer} />
-          </div>
-        </Router>
+        <MuiThemeProvider>
+          <Router>
+            <div>
+              <Route exact={true} path="/" component={TopPageContainer} />
+              <Route path="/edit" component={EditPageContainer} />
+              <Route path="/note/:id" component={NotePage} />
+            </div>
+          </Router>
+        </MuiThemeProvider>
       </div>
     );
   }
