@@ -6,15 +6,15 @@ import { usersStore } from '../data_store';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 export default class EditPageContainer extends Component {
-    render() {
-        return (
-            <div>
-                <MuiThemeProvider>
-                    <Provider note={noteStore} users={usersStore}>
-                        <EditPage />
-                    </Provider>
-                </MuiThemeProvider>
-            </div>
-        );
-    }
+  render() {
+    return (
+      <div>
+        <MuiThemeProvider>
+          <Provider note={noteStore} users={usersStore}>
+            <EditPage />
+          </Provider>
+        </MuiThemeProvider>
+      </div>
+    );
+  }
 }

@@ -22,7 +22,8 @@
     "react-scripts-ts": "2.14.0",
     "react-tap-event-plugin": "^3.0.2",
     "remark": "^9.0.0",
-    "remark-react": "^4.0.1"
+    "remark-react": "^4.0.1",
+    "universal-cookie": "^2.1.2"
   },
   "scripts": {
     "start": "react-scripts-ts start",

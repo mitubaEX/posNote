@@ -3,3 +3,4 @@ declare module 'react-router';
 declare module 'remark';
 declare module 'remark-react';
 declare module 'marked';
+declare module 'universal-cookie';
