@@ -1,4 +1,6 @@
 import { observable, action, computed } from 'mobx';
+import { firebaseDb } from '../firebase';
+import { usersStore } from '../data_store';
 
 export type NoteStoreType = {
   note: Note
@@ -6,19 +8,23 @@ export type NoteStoreType = {
   noteBody: string
   changeTitle: (title: string) => void
   changeBody: (body: string) => void
+  postNote: () => void
+  finishPost: () => void
 };
 
 type Note = {
   id: string
   title: string
   body: string
+  isPosted: boolean
 };
 
 export default class NoteStore {
   @observable note: Note = {
     id: '',
     title: '',
-    body: ''
+    body: '',
+    isPosted: false
   };
 
   @computed get noteTitle() {
@@ -38,5 +44,20 @@ export default class NoteStore {
   @action.bound changeBody(body: string) {
     console.log(body);
     this.note.body = body;
+  }
+
+  @action.bound postNote() {
+    firebaseDb.ref('posts/' + usersStore.loginUID).push({
+      title: this.noteTitle,
+      body: this.noteBody,
+      timestamp: Math.floor(new Date().getTime() / 1000)
+    });
+    this.note.title = '';
+    this.note.body = '';
+    this.note.isPosted = true;
+  }
+
+  @action.bound finishPost() {
+    this.note.isPosted = false;
   }
 }

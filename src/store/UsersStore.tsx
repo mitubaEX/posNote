@@ -26,6 +26,7 @@ type Credential = {
 export type UsersStoreType = {
   users: Array<ProviderData>
   addUser: (user: ProviderData) => void
+  loginUID: string
   loginUserName: string
   isLogin: boolean
   loginUserPhotoURL: string
@@ -35,6 +36,10 @@ export type UsersStoreType = {
 
 export default class UsersStore {
   @observable users = new Array<ProviderData>();
+
+  @computed get loginUID() {
+    return this.users.map((n) => n.uid).join(',');
+  }
 
   @computed get loginUserName() {
     return this.users.map((n) => n.displayName).join(',');
