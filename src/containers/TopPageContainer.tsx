@@ -1,22 +1,36 @@
 import React, { Component } from 'react';
-import { Provider } from 'mobx-react';
 import TopPage from '../components/TopPage';
-import { usersStore, noteStore, noteListStore } from '../data_store';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
-export default class TopPageContainer extends Component {
+type Props = {
+  match: {
+    params: {
+      uid: string
+    }
+  }
+};
+
+type State = {
+  params: {
+    uid: string
+  }
+};
+
+export default class TopPageContainer extends Component<Props, State> {
+  constructor(props: Props) {
+    super(props);
+    if (props.match.params.uid) {
+      this.state = { params: { uid: props.match.params.uid } };
+    } else {
+      this.state = { params: { uid: '' } };
+    }
+  }
+
   render() {
     return (
       <div>
-        <MuiThemeProvider>
-          <Provider
-            usersStore={usersStore}
-            noteStore={noteStore}
-            noteListStore={noteListStore}
-          >
-            <TopPage />
-          </Provider>
-        </MuiThemeProvider>
+        <TopPage
+          match={this.state}
+        />
       </div>
     );
   }
