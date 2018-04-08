@@ -58,9 +58,9 @@ export default class NoteListStore {
   }
 
   @action.bound findByUID(uid: string) {
-    this.userNoteList = this.allUserNoteList.filter((n) => n.uid === uid).map((n) => n.eachUIDNoteList)[0];
-    if (this.userNoteList) {
-      return this.userNoteList;
+    const noteList = this.allUserNoteList.filter((n) => n.uid === uid).map((n) => n.eachUIDNoteList)[0];
+    if (noteList) {
+      return noteList;
     }
     return [];
   }
