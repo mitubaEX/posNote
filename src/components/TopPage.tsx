@@ -17,12 +17,11 @@ type Props = {
 @observer
 export default class TopPage extends Component<Props> {
   render() {
-    const { usersStore } = this.props;
-    const { noteStore } = this.props;
-    const { noteListStore } = this.props;
     return (
       <div>
-        <TopPageBody usersStore={usersStore!} noteStore={noteStore!} noteListStore={noteListStore!}/>
+        <TopPageBody
+          match={{ params: { uid: '' } }}
+        />
       </div>
     );
   }

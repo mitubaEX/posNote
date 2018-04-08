@@ -16,7 +16,7 @@ type Props = {
   usersStore: UsersStoreType
 };
 
-const Logged = (props: { onClick: () => void, avatarImage: string }) => (
+const Logged = (props: { onClick: () => void, avatarImage: string, uid: string }) => (
   <div>
     <IconButton><Link to="/edit"><ContentCreate /></Link></IconButton>
     <IconMenu
@@ -28,7 +28,10 @@ const Logged = (props: { onClick: () => void, avatarImage: string }) => (
       targetOrigin={{ horizontal: 'right', vertical: 'top' }}
       anchorOrigin={{ horizontal: 'right', vertical: 'top' }}
     >
-      <MenuItem primaryText="My notes" />
+      <MenuItem
+        primaryText="My notes"
+        containerElement={<Link to={`/user/${props.uid}`} />}
+      />
       <MenuItem primaryText="Sign out" onClick={props.onClick} />
     </IconMenu>
   </div>
@@ -51,6 +54,7 @@ export default class MyAppBar extends Component<Props> {
             <Logged
               onClick={usersStore!.logoutUser}
               avatarImage={usersStore!.loginUserPhotoURL}
+              uid={usersStore!.loginUID}
             /> :
             <FlatButton
               label="Login"

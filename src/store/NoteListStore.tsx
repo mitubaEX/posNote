@@ -6,6 +6,7 @@ export type NoteListStoreType = {
   currentUserNoteList: Array<Note>
   fetchAllUserNoteList: () => void
   findByNoteId: (uid: string) => Note
+  findByUID: (uid: string) => Array<Note>
 };
 
 type EachUIDNoteList = {
@@ -58,6 +59,10 @@ export default class NoteListStore {
 
   @action.bound findByUID(uid: string) {
     this.userNoteList = this.allUserNoteList.filter((n) => n.uid === uid).map((n) => n.eachUIDNoteList)[0];
+    if (this.userNoteList) {
+      return this.userNoteList;
+    }
+    return [];
   }
 
   @action.bound findByNoteId(id: string) {

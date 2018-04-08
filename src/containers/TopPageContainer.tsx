@@ -3,7 +3,6 @@ import { Provider } from 'mobx-react';
 import TopPage from '../components/TopPage';
 import { usersStore, noteStore, noteListStore } from '../data_store';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import DevTools from 'mobx-react-devtools';
 
 export default class TopPageContainer extends Component {
   render() {
@@ -18,7 +17,6 @@ export default class TopPageContainer extends Component {
             <TopPage />
           </Provider>
         </MuiThemeProvider>
-        <DevTools />
       </div>
     );
   }

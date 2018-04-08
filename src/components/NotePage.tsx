@@ -20,7 +20,7 @@ export default class NotePage extends Component<Props> {
         <Card style={{margin: '10px'}}>
           <CardHeader
             title={note.title}
-            subtitle={note.timestamp}
+            subtitle={`${note.timestamp} ${note.displayName}`}
             avatar={note.photoURL}
             titleStyle={{fontSize: 17, fontWeight: 'bold'}}
             style={{backgroundColor: '#CEECF5'}}
