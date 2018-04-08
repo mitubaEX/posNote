@@ -45,8 +45,8 @@ export default class NoteListStore {
           body: m.body,
           isPosted: false,
           snackbarMessage: '',
-          displayName: '',
-          photoURL: ''
+          displayName: m.displayName,
+          photoURL: m.photoURL
         };
         noteList.push(note);
       }));

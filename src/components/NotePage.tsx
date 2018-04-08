@@ -13,21 +13,20 @@ type Props = {
 
 export default class NotePage extends Component<Props> {
   render() {
-    console.log(this.props);
     const id = this.props.match.params.id;
     const note = noteListStore.findByNoteId(id);
-    console.log(note);
     return (
       <div>
-        <Card>
+        <Card style={{margin: '10px'}}>
           <CardHeader
             title={note.title}
             subtitle={note.timestamp}
-            style={{ borderWidth: '3px', borderColor: 'black' }}
             avatar={note.photoURL}
+            titleStyle={{fontSize: 17, fontWeight: 'bold'}}
+            style={{backgroundColor: '#CEECF5'}}
           />
           <CardText>
-            <MarkDownPreview body={note.body} />
+            <MarkDownPreview body={note.body} width={'100%'}/>
           </CardText>
         </Card>
       </div>

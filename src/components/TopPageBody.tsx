@@ -26,21 +26,16 @@ export default class TopPageBody extends Component<Props> {
   }
   
   render() {
-    const { usersStore } = this.props;
     const { noteStore } = this.props;
     const { noteListStore } = this.props;
     return (
       <div>
-        {usersStore!.isLogin ?
-          'Hello' :
-          'Please Login'
-        }
         <List>
           {
             noteListStore.currentUserNoteList.map((m, index) =>
               <ListItem
                 key={index}
-                leftAvatar={<Avatar src={usersStore!.loginUserPhotoURL} />}
+                leftAvatar={<Avatar src={m.photoURL} />}
                 primaryText={m.title}
                 secondaryText={
                   <p>

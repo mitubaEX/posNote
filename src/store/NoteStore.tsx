@@ -57,12 +57,10 @@ export default class NoteStore {
   }
 
   @action.bound changeTitle(title: string) {
-    console.log(title);
     this.note.title = title;
   }
 
   @action.bound changeBody(body: string) {
-    console.log(body);
     this.note.body = body;
   }
 
