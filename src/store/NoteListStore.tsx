@@ -4,9 +4,8 @@ import { Note } from './NoteStore';
 
 export type NoteListStoreType = {
   currentUserNoteList: Array<Note>
-  getUserNoteList: () => void
   fetchAllUserNoteList: () => void
-  findByNoteId: () => void
+  findByNoteId: (uid: string) => Note
 };
 
 type EachUIDNoteList = {
@@ -45,7 +44,9 @@ export default class NoteListStore {
           timestamp: m.timestamp,
           body: m.body,
           isPosted: false,
-          snackbarMessage: ''
+          snackbarMessage: '',
+          displayName: '',
+          photoURL: ''
         };
         noteList.push(note);
       }));
@@ -66,7 +67,9 @@ export default class NoteListStore {
       timestamp: '',
       title: '',
       body: '',
-      snackbarMessage: ''
+      snackbarMessage: '',
+      photoURL: '',
+      displayName: ''
     };
     this.allUserNoteList.forEach((n) => n.eachUIDNoteList.forEach((m) => {
       if (m.id === id) {

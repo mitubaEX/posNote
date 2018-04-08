@@ -3,7 +3,6 @@ import { UsersStoreType } from '../store/UsersStore';
 import { NoteStoreType } from '../store/NoteStore';
 import { NoteListStoreType } from '../store/NoteListStore';
 import { inject, observer } from 'mobx-react';
-import MyAppBar from './MyAppBar';
 import TopPageBody from './TopPageBody';
 
 type Props = {
@@ -23,7 +22,6 @@ export default class TopPage extends Component<Props> {
     const { noteListStore } = this.props;
     return (
       <div>
-        <MyAppBar usersStore={usersStore!} />
         <TopPageBody usersStore={usersStore!} noteStore={noteStore!} noteListStore={noteListStore!}/>
       </div>
     );

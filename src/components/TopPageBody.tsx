@@ -24,11 +24,6 @@ export default class TopPageBody extends Component<Props> {
     const { noteListStore } = this.props;
     noteListStore.fetchAllUserNoteList();
   }
-
-  unixTimeToDate(time: number) {
-    const date = new Date(time);
-    return `${date.getFullYear()}/${(date.getMonth() + 1)}/${date.getDate()}`;
-  }
   
   render() {
     const { usersStore } = this.props;
@@ -49,7 +44,7 @@ export default class TopPageBody extends Component<Props> {
                 primaryText={m.title}
                 secondaryText={
                   <p>
-                    <span style={{ color: darkBlack }}>{this.unixTimeToDate(Number(m.timestamp) * 1000)}</span>
+                    <span style={{ color: darkBlack }}>{m.timestamp}</span>
                   </p>
                 }
                 secondaryTextLines={2}

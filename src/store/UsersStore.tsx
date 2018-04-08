@@ -25,11 +25,11 @@ type Credential = {
 
 export type UsersStoreType = {
   users: Array<ProviderData>
-  addUser: (user: ProviderData) => void
   loginUID: string
   loginUserName: string
   isLogin: boolean
   loginUserPhotoURL: string
+  getCookieAndLogin: () => void
   loginUser: () => void
   logoutUser: () => void
 };

@@ -20,6 +20,13 @@ export type Note = {
   isPosted: boolean
   timestamp: string
   snackbarMessage: string
+  photoURL: string,
+  displayName: string
+};
+
+const unixTimeToDate = (time: number) => {
+  const date = new Date(time);
+  return `${date.getFullYear()}/${(date.getMonth() + 1)}/${date.getDate()}`;
 };
 
 export default class NoteStore {
@@ -29,7 +36,9 @@ export default class NoteStore {
     body: '',
     isPosted: false,
     timestamp: '',
-    snackbarMessage: ''
+    snackbarMessage: '',
+    photoURL: '',
+    displayName: ''
   };
 
   @computed get noteTitle() {
@@ -65,7 +74,9 @@ export default class NoteStore {
       firebaseDb.ref('posts/' + usersStore.loginUID).push({
         title: this.noteTitle,
         body: this.noteBody,
-        timestamp: Math.floor(new Date().getTime() / 1000)
+        timestamp: unixTimeToDate(new Date().getTime()),
+        displayName: usersStore.users[0].displayName,
+        photoURL: usersStore.users[0].photoURL
       });
       this.note.title = '';
       this.note.body = '';

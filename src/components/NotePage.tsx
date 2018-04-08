@@ -24,9 +24,10 @@ export default class NotePage extends Component<Props> {
             title={note.title}
             subtitle={note.timestamp}
             style={{ borderWidth: '3px', borderColor: 'black' }}
+            avatar={note.photoURL}
           />
           <CardText>
-            <MarkDownPreview body={noteListStore.findByNoteId(id).body} />
+            <MarkDownPreview body={note.body} />
           </CardText>
         </Card>
       </div>

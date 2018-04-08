@@ -10,6 +10,7 @@ import {
 } from 'react-router-dom';
 import { usersStore } from './data_store';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import MyAppBar from './components/MyAppBar';
 
 class App extends Component {
   componentWillMount() {
@@ -22,6 +23,7 @@ class App extends Component {
         <MuiThemeProvider>
           <Router>
             <div>
+              <MyAppBar usersStore={usersStore} />
               <Route exact={true} path="/" component={TopPageContainer} />
               <Route path="/edit" component={EditPageContainer} />
               <Route path="/note/:id" component={NotePage} />
