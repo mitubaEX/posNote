@@ -11,6 +11,7 @@ import {
 import { usersStore } from './data_store';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import MyAppBar from './components/MyAppBar';
+import TopPageBody from './components/TopPageBody';
 
 class App extends Component {
   componentWillMount() {
@@ -27,6 +28,7 @@ class App extends Component {
               <Route exact={true} path="/" component={TopPageContainer} />
               <Route path="/edit" component={EditPageContainer} />
               <Route path="/note/:id" component={NotePage} />
+              <Route path="/user/:uid" component={TopPageBody} />
             </div>
           </Router>
         </MuiThemeProvider>

@@ -1,49 +1,46 @@
 import React, { Component } from 'react';
-import { UsersStoreType } from '../store/UsersStore';
-import { NoteStoreType } from '../store/NoteStore';
-import { NoteListStoreType } from '../store/NoteListStore';
-import { inject, observer } from 'mobx-react';
-import { List, ListItem } from 'material-ui/List';
-import Avatar from 'material-ui/Avatar';
-import { darkBlack } from 'material-ui/styles/colors';
+import { List } from 'material-ui/List';
 import Snackbar from 'material-ui/Snackbar';
-import { Link } from 'react-router-dom';
+import MyListItem from './MyListItem';
+import { noteStore, noteListStore } from '../data_store';
+import { observer } from 'mobx-react';
 
 type Props = {
-  usersStore: UsersStoreType
-  noteStore: NoteStoreType
-  noteListStore: NoteListStoreType
+  match: {
+    params: {
+      uid: string
+    }
+  }
 };
 
-@inject('usersStore')
-@inject('noteStore')
-@inject('noteListStore')
 @observer
 export default class TopPageBody extends Component<Props> {
   componentDidMount() {
-    const { noteListStore } = this.props;
     noteListStore.fetchAllUserNoteList();
   }
   
   render() {
-    const { noteStore } = this.props;
-    const { noteListStore } = this.props;
     return (
       <div>
         <List>
-          {
+          { this.props.match.params.uid === '' ?
             noteListStore.currentUserNoteList.map((m, index) =>
-              <ListItem
+              <MyListItem
                 key={index}
-                leftAvatar={<Avatar src={m.photoURL} />}
-                primaryText={m.title}
-                secondaryText={
-                  <p>
-                    <span style={{ color: darkBlack }}>{m.timestamp}</span>
-                  </p>
-                }
-                secondaryTextLines={2}
-                containerElement={<Link to={`/note/${m.id}`} />}
+                photoURL={m.photoURL}
+                title={m.title}
+                timestamp={m.timestamp}
+                id={m.id}
+                displayName={m.displayName}
+              />
+            ) : noteListStore.findByUID(this.props.match.params.uid).map((m, index) =>
+              <MyListItem
+                key={index}
+                photoURL={m.photoURL}
+                title={m.title}
+                timestamp={m.timestamp}
+                id={m.id}
+                displayName={m.displayName}
               />
             )
           }
