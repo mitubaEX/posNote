@@ -3,6 +3,7 @@ import '../styleSheet/githubStyle.css';
 
 type Props = {
   body: string
+  width: string
 };
 
 export default class MarkDownPreview extends Component<Props> {
@@ -10,7 +11,7 @@ export default class MarkDownPreview extends Component<Props> {
     const marked = require('marked');
     return (
       <div
-        style={{ width: '50%', height: '100' }}
+        style={{ width: this.props.width, height: '100' }}
         className="markdown-body"
         dangerouslySetInnerHTML={{ __html: marked(this.props.body) }}
       />

@@ -40,7 +40,7 @@ export default class EditPageBody extends Component<Props> {
             width="50%"
             editorProps={{ $blockScrolling: true }}
           />
-          <MarkDownPreview body={noteStore!.noteBody} />
+          <MarkDownPreview body={noteStore!.noteBody} width={'50%'}/>
         </div>
         <RaisedButton
           primary={true}
