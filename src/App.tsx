@@ -10,6 +10,7 @@ import { usersStore, noteStore, noteListStore } from './data_store';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import MyAppBar from './components/MyAppBar';
 import { Provider } from 'mobx-react';
+import DevTools from 'mobx-react-devtools';
 
 class App extends Component {
   componentWillMount() {
@@ -25,13 +26,15 @@ class App extends Component {
               <div>
                 <MyAppBar usersStore={usersStore} />
                 <Route exact={true} path="/" component={TopPageContainer} />
-                <Route path="/edit" component={EditPageContainer} />
+                <Route path="/create" component={EditPageContainer} />
                 <Route path="/note/:id" component={NotePage} />
+                <Route path="/edit/:id" component={EditPageContainer} />
                 <Route path="/user/:uid" component={TopPageContainer} />
               </div>
             </Router>
           </Provider>
         </MuiThemeProvider>
+        <DevTools/>
       </div>
     );
   }

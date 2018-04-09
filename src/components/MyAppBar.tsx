@@ -8,9 +8,7 @@ import IconMenu from 'material-ui/IconMenu';
 import MenuItem from 'material-ui/MenuItem';
 import { UsersStoreType } from '../store/UsersStore';
 import ContentCreate from 'material-ui/svg-icons/content/create';
-import {
-  Link
-} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 type Props = {
   usersStore: UsersStoreType
@@ -18,7 +16,12 @@ type Props = {
 
 const Logged = (props: { onClick: () => void, avatarImage: string, uid: string }) => (
   <div>
-    <IconButton><Link to="/edit"><ContentCreate /></Link></IconButton>
+    <IconButton
+      tooltipPosition="top-center"
+      tooltip="Create"
+    >
+      <Link to="/create"><ContentCreate /></Link>
+    </IconButton>
     <IconMenu
       iconButtonElement={
         <IconButton>
