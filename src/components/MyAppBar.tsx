@@ -31,10 +31,6 @@ const Logged = (props: { onClick: () => void, avatarImage: string, uid: string }
       targetOrigin={{ horizontal: 'right', vertical: 'top' }}
       anchorOrigin={{ horizontal: 'right', vertical: 'top' }}
     >
-      <MenuItem
-        primaryText="My notes"
-        containerElement={<Link to={`/user/${props.uid}`} />}
-      />
       <MenuItem primaryText="Sign out" onClick={props.onClick} />
     </IconMenu>
   </div>

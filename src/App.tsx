@@ -29,7 +29,6 @@ class App extends Component {
                 <Route path="/create" component={EditPageContainer} />
                 <Route path="/note/:id" component={NotePage} />
                 <Route path="/edit/:id" component={EditPageContainer} />
-                <Route path="/user/:uid" component={TopPageContainer} />
               </div>
             </Router>
           </Provider>

@@ -5,8 +5,10 @@ import MyListItem from './MyListItem';
 import { observer, inject } from 'mobx-react';
 import { NoteStoreType } from '../store/NoteStore';
 import { NoteListStoreType } from '../store/NoteListStore';
+import { UsersStoreType } from '../store/UsersStore';
 
 type Props = {
+  usersStore?: UsersStoreType
   noteStore?: NoteStoreType
   noteListStore?: NoteListStoreType
   match: {
@@ -16,6 +18,7 @@ type Props = {
   }
 };
 
+@inject('usersStore')
 @inject('noteStore')
 @inject('noteListStore')
 @observer
@@ -26,31 +29,28 @@ export default class TopPage extends Component<Props> {
   }
   
   render() {
+    const { usersStore } = this.props;
     const { noteListStore } = this.props;
     const { noteStore } = this.props;
+    const noteList = noteListStore!.findByUID(usersStore!.loginUID);
+
     return (
       <div>
+        <p style={{ margin: '15px' }}>
+          {noteList.length === 0 ? '記事がありません' : ''}
+        </p>
         <List>
-          { this.props.match.params.uid === '' ?
-            noteListStore!.currentUserNoteList.map((m, index) =>
-              <MyListItem
-                key={index}
-                photoURL={m.photoURL}
-                title={m.title}
-                timestamp={m.timestamp}
-                id={m.id}
-                displayName={m.displayName}
-              />
-            ) : noteListStore!.findByUID(this.props.match.params.uid).map((m, index) =>
-              <MyListItem
-                key={index}
-                photoURL={m.photoURL}
-                title={m.title}
-                timestamp={m.timestamp}
-                id={m.id}
-                displayName={m.displayName}
-              />
-            )
+          {
+            noteList.map((m, index) =>
+            <MyListItem
+              key={index}
+              photoURL={m.photoURL}
+              title={m.title}
+              timestamp={m.timestamp}
+              id={m.id}
+              displayName={m.displayName}
+            />
+          )
           }
         </List>
         <Snackbar
