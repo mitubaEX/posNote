@@ -10,7 +10,6 @@ import { usersStore, noteStore, noteListStore } from './data_store';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import MyAppBar from './components/MyAppBar';
 import { Provider } from 'mobx-react';
-import DevTools from 'mobx-react-devtools';
 
 class App extends Component {
   componentWillMount() {
@@ -33,7 +32,6 @@ class App extends Component {
             </Router>
           </Provider>
         </MuiThemeProvider>
-        <DevTools/>
       </div>
     );
   }
