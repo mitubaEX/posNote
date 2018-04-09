@@ -11,6 +11,9 @@ export type NoteStoreType = {
   changeBody: (body: string) => void
   postNote: () => void
   finishPost: () => void
+  setEditFlag: (flag: boolean) => void
+  setNoteID: (id: string) => void
+  deleteNote: (id: string) => void
 };
 
 export type Note = {
@@ -22,6 +25,7 @@ export type Note = {
   snackbarMessage: string
   photoURL: string,
   displayName: string
+  isEdit: boolean
 };
 
 const unixTimeToDate = (time: number) => {
@@ -38,7 +42,8 @@ export default class NoteStore {
     timestamp: '',
     snackbarMessage: '',
     photoURL: '',
-    displayName: ''
+    displayName: '',
+    isEdit: false
   };
 
   @computed get noteTitle() {
@@ -64,26 +69,51 @@ export default class NoteStore {
     this.note.body = body;
   }
 
-  @action.bound postNote() {
+  @action.bound setEditFlag(flag: boolean) {
+    this.note.isEdit = flag;
+  }
+
+  @action.bound setNoteID(id: string) {
+    this.note.id = id;
+  }
+
+  @action.bound async postNote() {
     if ( this.note.title === '' || this.note.body === '' ) {
       this.note.snackbarMessage = 'タイトルと本文を設定してください！';
       this.note.isPosted = true;
     } else {
-      firebaseDb.ref('posts/' + usersStore.loginUID).push({
-        title: this.noteTitle,
-        body: this.noteBody,
-        timestamp: unixTimeToDate(new Date().getTime()),
-        displayName: usersStore.users[0].displayName,
-        photoURL: usersStore.users[0].photoURL
-      });
+      if (this.note.isEdit) {
+        await firebaseDb.ref(`posts/${usersStore.loginUID}/${this.note.id}`).set({
+          title: this.noteTitle,
+          body: this.noteBody,
+          timestamp: unixTimeToDate(new Date().getTime()),
+          displayName: usersStore.users[0].displayName,
+          photoURL: usersStore.users[0].photoURL
+        });
+        this.note.snackbarMessage = '記事が編集されました！';
+      } else {
+        await firebaseDb.ref('posts/' + usersStore.loginUID).push({
+          title: this.noteTitle,
+          body: this.noteBody,
+          timestamp: unixTimeToDate(new Date().getTime()),
+          displayName: usersStore.users[0].displayName,
+          photoURL: usersStore.users[0].photoURL
+        });
+        this.note.snackbarMessage = '記事が投稿されました！';
+      }
       this.note.title = '';
       this.note.body = '';
-      this.note.snackbarMessage = '記事が投稿されました！';
       this.note.isPosted = true;
     }
   }
 
   @action.bound finishPost() {
     this.note.isPosted = false;
+  }
+
+  @action.bound async deleteNote(id: string) {
+    await firebaseDb.ref(`posts/${usersStore.loginUID}/${id}`).remove();
+    this.note.snackbarMessage = '記事が削除されました！';
+    this.note.isPosted = true;
   }
 }

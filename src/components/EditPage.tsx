@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { NoteStoreType } from '../store/NoteStore';
+import { NoteListStoreType } from '../store/NoteListStore';
 import { inject, observer } from 'mobx-react';
 import AceEditor from 'react-ace';
 import MarkDownPreview from './MarkDownPreview';
@@ -12,11 +13,32 @@ import 'brace/theme/github';
 
 type Props = {
   noteStore?: NoteStoreType
+  noteListStore?: NoteListStoreType
+  match: {
+    params: {
+      id: string
+    }
+  }
 };
 
 @inject('noteStore')
+@inject('noteListStore')
 @observer
 export default class EditPage extends Component<Props> {
+  constructor(props: Props) {
+    super(props);
+    const noteId = props.match.params.id;
+    if ( noteId !== '') {
+      const note = props.noteListStore!.findByNoteId(noteId);
+      props.noteStore!.changeTitle(note.title);
+      props.noteStore!.changeBody(note.body);
+      props.noteStore!.setEditFlag(true);
+      props.noteStore!.setNoteID(props.match.params.id);
+    } else {
+      props.noteStore!.setEditFlag(false);
+    }
+  }
+
   render() {
     const { noteStore } = this.props;
     return (

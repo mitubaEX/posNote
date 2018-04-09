@@ -45,6 +45,7 @@ export default class NoteListStore {
           timestamp: m.timestamp,
           body: m.body,
           isPosted: false,
+          isEdit: false,
           snackbarMessage: '',
           displayName: m.displayName,
           photoURL: m.photoURL
@@ -69,6 +70,7 @@ export default class NoteListStore {
     var note: Note = {
       id: '',
       isPosted: false,
+      isEdit: false,
       timestamp: '',
       title: '',
       body: '',
