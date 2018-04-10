@@ -1,6 +1,7 @@
 import { observable, action, computed } from 'mobx';
 import { firebaseDb } from '../firebase';
 import { usersStore } from '../data_store';
+import { noteListStore } from '../data_store';
 
 export type NoteStoreType = {
   note: Note
@@ -115,5 +116,6 @@ export default class NoteStore {
     await firebaseDb.ref(`posts/${usersStore.loginUID}/${id}`).remove();
     this.note.snackbarMessage = '記事が削除されました！';
     this.note.isPosted = true;
+    noteListStore.fetchAllUserNoteList();
   }
 }
