@@ -1,6 +1,10 @@
 # posNote
 firebase + TypeScript練習
 
+## Demo
+
+![demo](./screenshot/demo.gif)
+
 ## Usage
 
 ```
